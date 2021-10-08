@@ -97,3 +97,13 @@ class IndexController extends AbstractController
 }
 
 ```
+
+## 注意
+
+需要自行捕获异常 `Hyperf\Validation\ValidationException`
+
+```
+if ($throwable instanceof ValidationException) {
+    $message = $throwable->validator->errors()->first();
+}
+```
