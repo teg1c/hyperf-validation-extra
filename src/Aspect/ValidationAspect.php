@@ -67,13 +67,12 @@ class ValidationAspect extends AbstractAspect
                     ]);
                 }
                 $data = [];
+                if ($this->request && empty($validation->field)) {
+                    $data = $this->container->get(RequestInterface::class)->all();
+                }
                 if ($validation->field && array_key_exists($validation->field, $proceedingJoinPoint->arguments['keys'])) {
                     $data = $proceedingJoinPoint->arguments['keys'][$validation->field];
                 }
-                if ($this->request) {
-                    $data = $this->container->get(RequestInterface::class)->all();
-                }
-
                 $this->validationData($data, $validation->validate, $validation->scene);
                 break;
             }
