@@ -67,9 +67,11 @@ class ValidationAspect extends AbstractAspect
                     ]);
                 }
                 $data = [];
+                //验证参数为空 默认从 `request` 拿请求参数
                 if ($this->request && empty($validation->field)) {
                     $data = $this->container->get(RequestInterface::class)->all();
                 }
+                //指定参数
                 if ($validation->field && array_key_exists($validation->field, $proceedingJoinPoint->arguments['keys'])) {
                     $data = $proceedingJoinPoint->arguments['keys'][$validation->field];
                 }
@@ -92,7 +94,6 @@ class ValidationAspect extends AbstractAspect
     protected function validationData($verData, $class, $scene)
     {
         $class = new $class();
-        //场景 验证
         $rules = $this->getRules($class, $scene);
         $message = call_user_func_array([$class, 'messages'], []);
         /** @var ValidatorFactoryInterface $validationFactory */
@@ -115,6 +116,7 @@ class ValidationAspect extends AbstractAspect
         $rules = call_user_func_array([$class, 'rules'], []);
         $scenes = call_user_func_array([$class, 'scenes'], []);
         if ($scene && isset($scenes) && is_array($scenes[$scene])) {
+            //验证场景 新增或覆盖原有规则
             $newRules = [];
             foreach ($scenes[$scene] as $key => $field) {
                 if (is_numeric($key)) {
