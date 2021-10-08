@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace Tegic\HyperfValidationExtra\Aspect;
 
+use Hyperf\Di\Annotation\Aspect;
 use Hyperf\Di\Aop\AbstractAspect;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\Di\Exception\Exception;
@@ -20,7 +21,9 @@ use Hyperf\Validation\ValidationException;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Tegic\HyperfValidationExtra\Annotation\Validation;
-
+/**
+ * @Aspect
+ */
 class ValidationAspect extends AbstractAspect
 {
     public $annotations = [
