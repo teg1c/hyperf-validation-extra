@@ -75,9 +75,9 @@ class IndexController extends AbstractController
 {
     /**
      * 不指定参数 默认验证数据从 `$this->request->all()` 获取，场景值为 `test`
-     * @Validation(validate=TestValidate::class, scene="test")
      * @return \Psr\Http\Message\ResponseInterface
      */
+    #[Validation(validate: TestValidate::class,field: "",scene: "test")]
     public function index()
     {
         $user = $this->request->input('user', 'Hyperf');
@@ -88,9 +88,9 @@ class IndexController extends AbstractController
 
     /**
      * 指定参数为 `params` 参数为数组形式 
-     * @Validation(validate=TestValidate::class, field="params", scene="test")
      * @param $params
      */
+     #[Validation(validate: TestValidate::class,field: "params",scene: "test")]
     protected function test($params)
     {
     }
