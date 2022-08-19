@@ -21,23 +21,21 @@ use Hyperf\Validation\ValidationException;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Tegic\HyperfValidationExtra\Annotation\Validation;
-/**
- * @Aspect
- */
+#[Aspect]
 class ValidationAspect extends AbstractAspect
 {
-    public $annotations = [
+    public array $annotations = [
         Validation::class,
     ];
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    protected ContainerInterface $container;
 
     /**
      * @var ServerRequestInterface
      */
-    protected $request;
+    protected ServerRequestInterface $request;
 
     public function __construct(ContainerInterface $container, ServerRequestInterface $request)
     {
